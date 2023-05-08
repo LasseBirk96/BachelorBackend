@@ -1,0 +1,92 @@
+version: '3.8'
+
+
+services:
+
+  postgres:
+    container_name: Postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev123
+      - POSTGRES_DB=Novo
+    ports:
+      - '5439:5432'
+    volumes:
+          
+          - ./sql/01-create_tables.sql:/docker-entrypoint-initdb.d/01-create_tables.sql
+          - ./sql/02-fill_tables.sql:/docker-entrypoint-initdb.d/02-fill_tables.sql
+          - ./sql/03-muleapp.sql:/docker-entrypoint-initdb.d/03-muleapp.sql
+          - ./sql/04-instance.sql:/docker-entrypoint-initdb.d/04-instance.sql
+
+
+
+
+   
+    networks:
+      - mapts
+      # - mapdis
+      # - mapdps
+  mapts:
+    build: 
+        context: .
+        args:
+          - COMPONENT_PATH=MAP-Tentants-Service
+    container_name: MAP-Tentants-Service
+    environment:
+     - POSTGRES_HOST=postgres
+     - POSTGRES_PORT=5432
+     - POSTGRES_USER=dev
+     - POSTGRES_PASSWORD=dev123
+     - POSTGRES_DB=Novo
+    depends_on:
+      - postgres
+    ports:
+      - 5000:5000
+    networks:
+      - mapts
+
+  # mapdis:
+  #   build: 
+  #       context: .
+  #       args:
+  #         - COMPONENT_PATH=MAP-Data-Ingestion-Service
+  #   container_name: MAP-Data-Ingestion-Service
+  #   environment:
+  #    - POSTGRES_HOST=postgres
+  #    - POSTGRES_PORT=5432
+  #    - POSTGRES_USER=dev
+  #    - POSTGRES_PASSWORD=dev123
+  #    - POSTGRES_DB=Novo
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - 5001:5001
+  #   networks:
+  #     - mapdis
+
+  # mapdps:
+  #   build: 
+  #       context: .
+  #       args:
+  #         - COMPONENT_PATH=MAP-Data-Processor-Service
+  #   container_name: MAP-Data-Processor-Service
+  #   environment:
+  #    - POSTGRES_HOST=postgres
+  #    - POSTGRES_PORT=5432
+  #    - POSTGRES_USER=dev
+  #    - POSTGRES_PASSWORD=dev123
+  #    - POSTGRES_DB=Novo
+  #   depends_on:
+  #     - postgres
+  #   ports:
+  #     - 5002:5002
+  #   networks:
+  #     - mapdps
+
+
+networks:
+  mapts:
+  # mapdis:
+  # mapdps:

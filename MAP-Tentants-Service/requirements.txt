@@ -1,0 +1,12 @@
+Flask==2.2.2
+Flask_RESTful==0.3.9
+Flask_Bcrypt==0.7.1
+psycopg2==2.9.3
+psycopg2-binary==2.9.5
+Werkzeug==2.2.2
+PyJWT==2.4.0
+pytest-postgresql==4.1.1
+psycopg==3.1.4
+nanoid
+dacite==1.8.0
+flask_cors
