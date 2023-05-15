@@ -6,4 +6,4 @@ def cool_method(a, b):
     return c
 
 
-print("ieftgib")
+print("ieftsgib")
