@@ -1,6 +1,6 @@
 #!/bin/bash
 
-services=("ProductComponent" "UserComponent" "DriverComponent" "BankingComponent")
+services=("MAP-Tentants-Service" "MAP-Data-Processor-Service" "MAP-Data-Ingestion-Service")
 testPath="Tests"
 
 for service in "${services[@]}"
