@@ -26,6 +26,7 @@ def job_1(job_name="GET - MERGE - PERSIST MULEAPPLICATION-INSTANCES"):
         prepared_batch = database_functionality.prepare_batch(id, data, names_of_muleapps)
         database_functionality.persist_instance(id, prepared_batch)
         database_functionality.update_row(id)
+        #SEND TO REDIS "BATCH WITH ID WAS SUCCESS"
     except TypeError as error:
         log().error("NO BATCHES AVAILABLE")
     except Exception as error:

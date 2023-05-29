@@ -1,6 +1,6 @@
 #!/bin/bash
 
-services=("EmailService")
+services=("MAP-Data-Ingestion-Service" "MAP-Data-Processor-Service")
 
 for service in "${services[@]}"
 do

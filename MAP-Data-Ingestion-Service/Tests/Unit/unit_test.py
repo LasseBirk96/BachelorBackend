@@ -1,6 +1,7 @@
-from main import cool_method
 
-
+def cool_method(a, b):
+    c = a + b
+    return c
 
 
 def test_cool_method():
